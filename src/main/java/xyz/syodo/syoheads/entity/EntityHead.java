@@ -7,7 +7,6 @@ import cn.nukkit.entity.custom.CustomEntity;
 import cn.nukkit.entity.data.EntityDataType;
 import cn.nukkit.entity.data.EntityDataTypes;
 import cn.nukkit.entity.data.Skin;
-import cn.nukkit.item.Item;
 import cn.nukkit.level.format.IChunk;
 import cn.nukkit.math.AxisAlignedBB;
 import cn.nukkit.math.SimpleAxisAlignedBB;

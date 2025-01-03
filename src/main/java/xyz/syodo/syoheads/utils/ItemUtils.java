@@ -8,11 +8,8 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.registry.Registries;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.nio.ByteOrder;
 import java.util.Base64;
@@ -20,9 +17,18 @@ import java.util.Base64;
 public class ItemUtils {
 
     public static Item createJavaSkullItem(String username) {
+        Item item = null;
+        try {
+            createSkullFromUrl(username, new URL("https://minecraft.tools/download-skin/" + username));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return item;
+    }
+
+    public static Item createSkullFromUrl(String owner, URL url) {
         Item item = Item.AIR;
         try {
-            URL url = new URL("https://minecraft.tools/download-skin/" + username);
             BufferedImage image = ImageIO.read(url);
             final byte[] imageData = new byte[image.getHeight() * image.getWidth() * 4];
             int cursor = 0;
@@ -35,7 +41,7 @@ public class ItemUtils {
                     imageData[cursor++] = (byte) ((color >> 24) & 0xFF);
                 }
             }
-            item = createSkullItem(username, imageData);
+            item = createSkullItem(owner, imageData);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

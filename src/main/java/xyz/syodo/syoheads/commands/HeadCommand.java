@@ -6,6 +6,7 @@ import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.entity.data.Skin;
 import cn.nukkit.item.Item;
+import xyz.syodo.syoheads.database.Database;
 import xyz.syodo.syoheads.utils.ItemUtils;
 
 public class HeadCommand extends Command {
@@ -13,14 +14,18 @@ public class HeadCommand extends Command {
     public HeadCommand() {
         super("head");
         setPermission("syohead.get");
-        setUsage("§c/head (bedrock|java) [playername]");
+        setUsage("§c/head (bedrock|java|database) [playername]");
     }
 
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         if(sender instanceof Player player) {
             if(args.length > 0) {
-                if(args.length == 2) {
+                if(args.length == 1) {
+                    if(args[0].equalsIgnoreCase("database")) {
+                        Database.openDatabaseScreen(player);
+                    } else sender.sendMessage(getUsage());
+                } else if(args.length == 2) {
                     Item item = null;
                     if(args[0].equalsIgnoreCase("bedrock")) {
                         Player target = Server.getInstance().getPlayer(args[1]);

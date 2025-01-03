@@ -3,6 +3,7 @@ package xyz.syodo.syoheads;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.plugin.PluginManager;
 import xyz.syodo.syoheads.commands.HeadCommand;
+import xyz.syodo.syoheads.database.Database;
 import xyz.syodo.syoheads.listener.BlockBreakListener;
 import xyz.syodo.syoheads.listener.BlockPlaceListener;
 import xyz.syodo.syoheads.listener.ChunkLoadListener;
@@ -25,6 +26,7 @@ public class SyoHeads extends PluginBase {
         manager.registerEvents(new BlockPlaceListener(), get());
         manager.registerEvents(new BlockBreakListener(), get());
         manager.registerEvents(new ChunkLoadListener(), get());
+        manager.registerEvents(new Database(), get());
 
         getServer().getCommandMap().register("head", new HeadCommand());
     }
