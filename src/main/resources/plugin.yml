@@ -1,0 +1,7 @@
+name: SyoHeads
+version: 1.0.0
+api: 2.0.0
+authors: [Buddelbubi, Syodo Minigames Network]
+description: SyoHeads is a Head Plugin for PowerNukkitX which adds playerheads to the server.
+main: xyz.syodo.syoheads.SyoHeads
+load: STARTUP
