@@ -82,7 +82,7 @@
         <dependency>
             <groupId>com.github.PowerNukkitX</groupId>
             <artifactId>PowerNukkitX</artifactId>
-            <version>master-snapshot-g7fdbd42-1</version>
+            <version>master-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

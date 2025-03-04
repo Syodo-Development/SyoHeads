@@ -4,9 +4,8 @@ import cn.nukkit.Player;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerFormRespondedEvent;
-import cn.nukkit.form.element.ElementButton;
-import cn.nukkit.form.element.ElementButtonImageData;
-import cn.nukkit.form.window.FormWindowSimple;
+import cn.nukkit.form.element.simple.ButtonImage;
+import cn.nukkit.form.window.SimpleForm;
 import cn.nukkit.item.Item;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -35,11 +34,11 @@ public class Database implements Listener {
     };
 
     public static void openDatabaseScreen(Player player) {
-        FormWindowSimple formWindowSimple = new FormWindowSimple("§eheaddb.org", "");
+        SimpleForm formWindowSimple = new SimpleForm("§eheaddb.org", "");
         for(String category : CATEGORIES) {
-            formWindowSimple.addButton(new ElementButton("§e" + category, new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_URL, "https://headdb.org/img/categories/" + category.toLowerCase() + ".png")));
+            formWindowSimple.addButton("§e" + category, ButtonImage.Type.URL.of("https://headdb.org/img/categories/" + category.toLowerCase() + ".png"));
         }
-        player.showFormWindow(formWindowSimple, "syoheads.categories".hashCode());
+        player.sendForm(formWindowSimple, "syoheads.categories".hashCode());
     }
 
     private static void openCategory(Player player, String category) {
@@ -52,26 +51,26 @@ public class Database implements Listener {
             }
         }
         JsonObject categoryData = CACHE.get(category);
-        FormWindowSimple formWindowSimple = new FormWindowSimple("§eheaddb.org", category);
+        SimpleForm formWindowSimple = new SimpleForm("§eheaddb.org", category);
         for(String head : categoryData.keySet()) {
-            formWindowSimple.addButton(new ElementButton("§e" + categoryData.get(head).getAsJsonObject().get("name").getAsString(), new ElementButtonImageData(ElementButtonImageData.IMAGE_DATA_TYPE_URL, "https://headdb.org/img/renders/" + head + ".png")));
+            formWindowSimple.addButton("§e" + categoryData.get(head).getAsJsonObject().get("name").getAsString(), ButtonImage.Type.URL.of("https://headdb.org/img/renders/" + head + ".png"));
         }
-        player.showFormWindow(formWindowSimple, "syoheads.category".hashCode());
+        player.sendForm(formWindowSimple, "syoheads.category".hashCode());
     }
 
     @EventHandler
     public void on(PlayerFormRespondedEvent event) {
         Player player = event.getPlayer();
         if(event.getFormID() == "syoheads.categories".hashCode()) {
-            if(event.getWindow() instanceof FormWindowSimple fw) {
-                if(fw.getResponse() != null) {
-                    openCategory(player, CATEGORIES[fw.getResponse().getClickedButtonId()].toLowerCase());
+            if(event.getWindow() instanceof SimpleForm fw) {
+                if(fw.response() != null) {
+                    openCategory(player, CATEGORIES[fw.response().buttonId()].toLowerCase());
                 }
             }
         } else if(event.getFormID() == "syoheads.category".hashCode()) {
-            if(event.getWindow() instanceof FormWindowSimple fw) {
-                if(fw.getResponse() != null) {
-                    String category = fw.getContent();
+            if(event.getWindow() instanceof SimpleForm fw) {
+                if(fw.response() != null) {
+                    String category = fw.content();
                     if(!CACHE.containsKey(category)) {
                         try {
                             CACHE.put(category, JsonParser.parseString(new Scanner(new URL(API_URL + category).openStream(), "UTF-8").useDelimiter("\\A").next()).getAsJsonObject());
@@ -80,14 +79,14 @@ public class Database implements Listener {
                         }
                     }
                     JsonObject categoryData = CACHE.get(category);
-                    String key = (String) categoryData.keySet().toArray()[fw.getResponse().getClickedButtonId()];
+                    String key = (String) categoryData.keySet().toArray()[fw.response().buttonId()];
                     String url = categoryData.get(key).getAsJsonObject()
                             .get("valueDecoded").getAsJsonObject()
                             .get("textures").getAsJsonObject()
                             .get("SKIN").getAsJsonObject()
                             .get("url").getAsString();
                      try {
-                        Item item = ItemUtils.createSkullFromUrl(fw.getResponse().getClickedButton().getText(), new URL(url));
+                        Item item = ItemUtils.createSkullFromUrl(fw.response().button().text(), new URL(url));
                         player.getInventory().addItem(item);
                         player.sendMessage("§aHead created successfully.");
                     } catch (Exception e) {
