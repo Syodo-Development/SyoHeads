@@ -19,7 +19,7 @@ public class ItemUtils {
     public static Item createJavaSkullItem(String username) {
         Item item = null;
         try {
-            createSkullFromUrl(username, new URL("https://minecraft.tools/download-skin/" + username));
+            item = createSkullFromUrl(username, new URL("https://minecraft.tools/download-skin/" + username));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
