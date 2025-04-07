@@ -1,13 +1,20 @@
 package xyz.syodo.syoheads.commands;
 
 import cn.nukkit.Player;
-import cn.nukkit.Server;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.data.CommandParamType;
+import cn.nukkit.command.data.CommandParameter;
+import cn.nukkit.command.tree.ParamList;
+import cn.nukkit.command.utils.CommandLogger;
+import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.data.Skin;
 import cn.nukkit.item.Item;
 import xyz.syodo.syoheads.database.Database;
 import xyz.syodo.syoheads.utils.ItemUtils;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class HeadCommand extends Command {
 
@@ -15,38 +22,53 @@ public class HeadCommand extends Command {
         super("head");
         setPermission("syohead.get");
         setUsage("§c/head (bedrock|java|database) [playername]");
+        this.commandParameters.clear();
+        this.commandParameters.put("bedrock", new CommandParameter[]{
+                CommandParameter.newEnum("bedrock", new String[]{"bedrock"}),
+                CommandParameter.newType("player", CommandParamType.TARGET),
+        });
+        this.commandParameters.put("java", new CommandParameter[]{
+                CommandParameter.newEnum("java", new String[]{"java"}),
+                CommandParameter.newType("player", CommandParamType.STRING),
+        });
+        this.commandParameters.put("database", new CommandParameter[]{
+                CommandParameter.newEnum("database", new String[]{"database"})
+        });
+        this.enableParamTree();
     }
 
     @Override
-    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
+    public int execute(CommandSender sender, String commandLabel, Map.Entry<String, ParamList> result, CommandLogger log) {
+        Item item = null;
+        var list = result.getValue();
         if(sender instanceof Player player) {
-            if(args.length > 0) {
-                if(args.length == 1) {
-                    if(args[0].equalsIgnoreCase("database")) {
-                        Database.openDatabaseScreen(player);
-                    } else sender.sendMessage(getUsage());
-                } else if(args.length == 2) {
-                    Item item = null;
-                    if(args[0].equalsIgnoreCase("bedrock")) {
-                        Player target = Server.getInstance().getPlayer(args[1]);
-                        if(target != null) {
+            switch (result.getKey()) {
+                case "database" -> {
+                    Database.openDatabaseScreen(player);
+                    return 1;
+                }
+                case "bedrock" -> {
+                    ArrayList<Entity> entities = list.getResult(1);
+                    if(entities.size() == 1) {
+                        if(entities.get(0) instanceof Player target) {
                             if(target.isOnline()) {
                                 Skin skin = target.getSkin();
                                 if(!skin.isPersona()) {
                                     item = ItemUtils.createSkullItem(target.getName(), skin.getSkinData().data);
                                 } else sender.sendMessage("§cThe players skin cannot be used for heads.");
                             } else sender.sendMessage("§cThis player is offline!");
-                        } else sender.sendMessage("§cThis player does not exist.");
-                    } else if(args[0].equalsIgnoreCase("java")) {
-                        item = ItemUtils.createJavaSkullItem(args[1]);
-                    } else sender.sendMessage(getUsage());
-                    if(item != null) {
-                        player.getInventory().addItem(item);
-                        player.sendMessage("§aHead created successfully.");
-                    }
-                } else sender.sendMessage(getUsage());
-            } else sender.sendMessage(getUsage());
+                        } else sender.sendMessage("§cThe target is not a player.");
+                    } else sender.sendMessage("§cPlease target only one player.");
+                }
+                case "java" -> {
+                    item = ItemUtils.createJavaSkullItem(list.getResult(1));
+                }
+            }
+            if(item != null) {
+                player.getInventory().addItem(item);
+                player.sendMessage("§aHead created successfully.");
+            }
         } else sender.sendMessage("Only a player can execute this command!");
-        return true;
+        return 1;
     }
 }
