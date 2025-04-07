@@ -7,6 +7,7 @@ import cn.nukkit.entity.custom.CustomEntity;
 import cn.nukkit.entity.data.EntityDataType;
 import cn.nukkit.entity.data.EntityDataTypes;
 import cn.nukkit.entity.data.Skin;
+import cn.nukkit.event.entity.EntityDamageEvent;
 import cn.nukkit.level.format.IChunk;
 import cn.nukkit.math.AxisAlignedBB;
 import cn.nukkit.math.SimpleAxisAlignedBB;
@@ -104,7 +105,7 @@ public class EntityHead extends EntityHuman implements CustomEntity {
     }
 
     @Override
-    public boolean attack(float damage) {
+    public boolean attack(EntityDamageEvent source) {
         return false;
     }
 
