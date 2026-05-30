@@ -19,14 +19,14 @@ public class BlockBreakListener implements Listener {
         if(event.isCancelled()) return;
         if(event.getBlock() instanceof BlockPlayerHead head) {
             BlockEntitySkull skull = head.getOrCreateBlockEntity();
-            if(skull.namedTag.containsCompound("HeadEntityData")) {
-                CompoundTag headData = skull.namedTag.getCompound("HeadEntityData");
-                if(skull.namedTag.contains("headEntityId")) {
-                    Entity entity = skull.getLevel().getEntity(skull.namedTag.getLong("headEntityId"));
+            if(skull.getNbt().containsCompound("HeadEntityData")) {
+                CompoundTag headData = skull.getNbt().getCompound("HeadEntityData");
+                if(skull.getNbt().contains("headEntityId")) {
+                    Entity entity = skull.getLevel().getEntity(skull.getNbt().getLong("headEntityId"));
                     if(entity != null) {
                         if(entity instanceof EntityHead entityHead) {
                             if(event.getDrops().length != 0) {
-                                event.setDrops(new Item[]{ItemUtils.createSkullItem(headData.getString("Owner"), entityHead.getSkin().getSkinData().data)});
+                                event.setDrops(new Item[]{ItemUtils.createSkullItem(headData.getString("Owner"), entityHead.getSkin().getSkin().getSkinData().getImage())});
                             }
                             entity.close();
                         }

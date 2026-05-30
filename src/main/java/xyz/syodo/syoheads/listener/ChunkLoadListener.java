@@ -16,9 +16,9 @@ public class ChunkLoadListener implements Listener {
         event.getLevel().getScheduler().scheduleDelayedTask(() -> {
             for(BlockEntity entity : event.getChunk().getBlockEntities().values()) {
                 if(entity instanceof BlockEntitySkull skull) {
-                    if(skull.namedTag.containsCompound("HeadEntityData")) {
+                    if(skull.getNbt().containsCompound("HeadEntityData")) {
                         EntityHead entityHead = EntityHead.create(skull);
-                        skull.namedTag.putLong("headEntityId", entityHead.getId());
+                        skull.getNbt().putLong("headEntityId", entityHead.getId());
                     }
                 }
             }

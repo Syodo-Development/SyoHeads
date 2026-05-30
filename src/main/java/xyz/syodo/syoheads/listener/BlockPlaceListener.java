@@ -16,17 +16,17 @@ public class BlockPlaceListener implements Listener {
     public void on(BlockPlaceEvent event) {
         if(event.isCancelled()) return;
         if(event.getBlock() instanceof BlockPlayerHead head) {
-            if(event.getItem().getOrCreateNamedTag().containsCompound("HeadData")) {
+            if(event.getItem().getOrCreateNbt().containsCompound("HeadData")) {
                 event.getBlock().getLevel().getScheduler().scheduleDelayedTask(() -> {
                     BlockEntitySkull skull = head.getOrCreateBlockEntity();
-                    if(!skull.namedTag.containsCompound("HeadEntityData")) {
-                        CompoundTag itemHeadData = event.getItem().getNamedTag().getCompound("HeadData");
+                    if(!skull.getNbt().containsCompound("HeadEntityData")) {
+                        CompoundTag itemHeadData = event.getItem().getNbt().getCompound("HeadData");
                         CompoundTag skullDataTag = SkinUtils.nbt(head, itemHeadData.getByteArray("SkinData"));
                         skullDataTag.putString("Owner", itemHeadData.getString("Owner"));
-                        skull.namedTag.putCompound("HeadEntityData", skullDataTag);
+                        skull.getNbt().putCompound("HeadEntityData", skullDataTag);
                     }
                     EntityHead entityHead = EntityHead.create(skull);
-                    skull.namedTag.putLong("headEntityId", entityHead.getId());
+                    skull.getNbt().putLong("headEntityId", entityHead.getId());
                 }, 1);
             }
         }

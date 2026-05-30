@@ -1,18 +1,13 @@
 package xyz.syodo.syoheads.utils;
 
 import cn.nukkit.block.BlockPlayerHead;
-import cn.nukkit.block.BlockState;
 import cn.nukkit.item.Item;
-import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.registry.Registries;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.ByteOrder;
-import java.util.Base64;
 
 public class ItemUtils {
 
@@ -49,18 +44,12 @@ public class ItemUtils {
     }
 
     public static Item createSkullItem(String owner, byte[] skinData) {
-        byte[] blockTag = Base64.getDecoder().decode("CgAAAwoAbmV0d29ya19pZGXgF6gECQBuYW1lX2hhc2icXBlvsIvwRggEAG5hbWUVAG1pbmVjcmFmdDpwbGF5ZXJfaGVhZAMHAHZlcnNpb24ZMhUBCgYAc3RhdGVzAxAAZmFjaW5nX2RpcmVjdGlvbgAAAAAAAA==");
-        CompoundTag blockCompoundTag = null;
-        try {
-            blockCompoundTag = NBTIO.read(blockTag, ByteOrder.LITTLE_ENDIAN);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!(cn.nukkit.block.Block.get("minecraft:player_head") instanceof BlockPlayerHead block)) {
             return Item.AIR;
         }
-        int blockHash = blockCompoundTag.getInt("network_id");
-        BlockState block = Registries.BLOCKSTATE.get(blockHash);
-        Item item = new BlockPlayerHead(block).toItem(); item.setBlockUnsafe(block.toBlock());
-        Item updateDamage = block.toBlock().toItem();
+        Item item = block.toItem();
+        item.setBlockUnsafe(block);
+        Item updateDamage = block.toItem();
         if (updateDamage.getDamage() != 0) {
             item.setDamage(updateDamage.getDamage());
         }
@@ -69,7 +58,7 @@ public class ItemUtils {
         CompoundTag itemData = new CompoundTag();
         itemData.putByteArray("SkinData", skinData);
         itemData.putString("Owner", owner);
-        item.getOrCreateNamedTag().putCompound("HeadData", itemData);
+        item.getOrCreateNbt().putCompound("HeadData", itemData);
         item.setCustomName(owner + (owner.endsWith("s") ? "" : "'s") + " Head");
         return item;
     }
