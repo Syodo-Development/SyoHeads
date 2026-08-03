@@ -20,7 +20,7 @@ public class HeadCommand extends Command {
 
     public HeadCommand() {
         super("head");
-        setPermission("syohead.get");
+        setPermission("heads.get");
         setUsage("§c/head (bedrock|java|database) [playername]");
         this.commandParameters.clear();
         this.commandParameters.put("bedrock", new CommandParameter[]{
