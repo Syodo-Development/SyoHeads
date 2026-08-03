@@ -1,14 +1,14 @@
 package xyz.syodo.syoheads.commands;
 
-import cn.nukkit.Player;
-import cn.nukkit.command.Command;
-import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.command.tree.ParamList;
-import cn.nukkit.command.utils.CommandLogger;
-import cn.nukkit.entity.Entity;
-import cn.nukkit.entity.data.human.Skin;
-import cn.nukkit.item.Item;
+import org.powernukkitx.Player;
+import org.powernukkitx.command.Command;
+import org.powernukkitx.command.CommandSender;
+import org.powernukkitx.command.data.CommandParameter;
+import org.powernukkitx.command.tree.ParamList;
+import org.powernukkitx.command.utils.CommandLogger;
+import org.powernukkitx.entity.Entity;
+import org.powernukkitx.entity.data.human.Skin;
+import org.powernukkitx.item.Item;
 import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import xyz.syodo.syoheads.database.Database;
 import xyz.syodo.syoheads.utils.ItemUtils;
@@ -25,7 +25,7 @@ public class HeadCommand extends Command {
         this.commandParameters.clear();
         this.commandParameters.put("bedrock", new CommandParameter[]{
                 CommandParameter.newEnum("bedrock", new String[]{"bedrock"}),
-                CommandParameter.newType("player", CommandParamType.WILDCARD_SELECTION),
+                CommandParameter.newType("player", CommandParamType.SELECTION),
         });
         this.commandParameters.put("java", new CommandParameter[]{
                 CommandParameter.newEnum("java", new String[]{"java"}),

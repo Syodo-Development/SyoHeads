@@ -1,8 +1,8 @@
 package xyz.syodo.syoheads.utils;
 
-import cn.nukkit.block.BlockPlayerHead;
-import cn.nukkit.item.Item;
-import cn.nukkit.nbt.tag.CompoundTag;
+import org.powernukkitx.block.BlockPlayerHead;
+import org.powernukkitx.item.Item;
+import org.powernukkitx.nbt.tag.CompoundTag;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -44,7 +44,7 @@ public class ItemUtils {
     }
 
     public static Item createSkullItem(String owner, byte[] skinData) {
-        if (!(cn.nukkit.block.Block.get("minecraft:player_head") instanceof BlockPlayerHead block)) {
+        if (!(org.powernukkitx.block.Block.get("minecraft:player_head") instanceof BlockPlayerHead block)) {
             return Item.AIR;
         }
         Item item = block.toItem();

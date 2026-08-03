@@ -21,10 +21,6 @@
             <url>https://repo.maven.apache.org/maven2/</url>
         </repository>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://www.jitpack.io</url>
-        </repository>
-        <repository>
             <id>PowerNukkitX-releases</id>
             <name>PowerNukkitX Repository</name>
             <url>https://repo.powernukkitx.org/releases</url>
@@ -88,7 +84,7 @@
         <dependency>
             <groupId>org.powernukkitx</groupId>
             <artifactId>server</artifactId>
-            <version>b-migration-SNAPSHOT</version>
+            <version>nightly-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

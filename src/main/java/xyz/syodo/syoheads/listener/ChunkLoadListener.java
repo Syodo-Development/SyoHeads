@@ -1,11 +1,11 @@
 package xyz.syodo.syoheads.listener;
 
-import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.blockentity.BlockEntitySkull;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.level.ChunkLoadEvent;
+import org.powernukkitx.blockentity.BlockEntity;
+import org.powernukkitx.blockentity.BlockEntitySkull;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.level.ChunkLoadEvent;
 import xyz.syodo.syoheads.entity.EntityHead;
 
 public class ChunkLoadListener implements Listener {

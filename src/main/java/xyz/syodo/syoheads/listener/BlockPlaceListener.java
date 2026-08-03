@@ -1,12 +1,12 @@
 package xyz.syodo.syoheads.listener;
 
-import cn.nukkit.block.BlockPlayerHead;
-import cn.nukkit.blockentity.BlockEntitySkull;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.EventPriority;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.block.BlockPlaceEvent;
-import cn.nukkit.nbt.tag.CompoundTag;
+import org.powernukkitx.block.BlockPlayerHead;
+import org.powernukkitx.blockentity.BlockEntitySkull;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.EventPriority;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.block.BlockPlaceEvent;
+import org.powernukkitx.nbt.tag.CompoundTag;
 import xyz.syodo.syoheads.entity.EntityHead;
 import xyz.syodo.syoheads.utils.SkinUtils;
 

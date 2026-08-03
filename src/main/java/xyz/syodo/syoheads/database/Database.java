@@ -1,12 +1,12 @@
 package xyz.syodo.syoheads.database;
 
-import cn.nukkit.Player;
-import cn.nukkit.event.EventHandler;
-import cn.nukkit.event.Listener;
-import cn.nukkit.event.player.PlayerFormRespondedEvent;
-import cn.nukkit.form.element.simple.ButtonImage;
-import cn.nukkit.form.window.SimpleForm;
-import cn.nukkit.item.Item;
+import org.powernukkitx.Player;
+import org.powernukkitx.event.EventHandler;
+import org.powernukkitx.event.Listener;
+import org.powernukkitx.event.player.PlayerFormRespondedEvent;
+import org.powernukkitx.form.element.simple.ButtonImage;
+import org.powernukkitx.form.window.SimpleForm;
+import org.powernukkitx.item.Item;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import xyz.syodo.syoheads.utils.ItemUtils;

@@ -1,10 +1,10 @@
 package xyz.syodo.syoheads.utils;
 
-import cn.nukkit.block.BlockPlayerHead;
-import cn.nukkit.blockentity.BlockEntitySkull;
-import cn.nukkit.level.Location;
-import cn.nukkit.math.BlockFace;
-import cn.nukkit.nbt.tag.*;
+import org.powernukkitx.block.BlockPlayerHead;
+import org.powernukkitx.blockentity.BlockEntitySkull;
+import org.powernukkitx.level.Location;
+import org.powernukkitx.math.BlockFace;
+import org.powernukkitx.nbt.tag.*;
 
 import java.nio.charset.StandardCharsets;
 

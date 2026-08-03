@@ -1,22 +1,24 @@
 package xyz.syodo.syoheads.entity;
 
-import cn.nukkit.Player;
-import cn.nukkit.blockentity.BlockEntitySkull;
-import cn.nukkit.entity.EntityHuman;
-import cn.nukkit.entity.custom.CustomEntity;
-import cn.nukkit.entity.data.human.Skin;
-import cn.nukkit.event.entity.EntityDamageEvent;
-import cn.nukkit.level.format.IChunk;
-import cn.nukkit.math.AxisAlignedBB;
-import cn.nukkit.math.SimpleAxisAlignedBB;
-import cn.nukkit.math.Vector3;
-import cn.nukkit.nbt.tag.*;
+import org.cloudburstmc.protocol.bedrock.data.payload.move.MovePlayerTeleportData;
+import org.cloudburstmc.protocol.bedrock.data.payload.move.PositionMode;
+import org.cloudburstmc.protocol.bedrock.packet.MovePlayerPacket;
+import org.powernukkitx.Player;
+import org.powernukkitx.blockentity.BlockEntitySkull;
+import org.powernukkitx.entity.EntityHuman;
+import org.powernukkitx.entity.custom.CustomEntity;
+import org.powernukkitx.entity.data.human.Skin;
+import org.powernukkitx.event.entity.EntityDamageEvent;
+import org.powernukkitx.level.format.IChunk;
+import org.powernukkitx.math.AxisAlignedBB;
+import org.powernukkitx.math.SimpleAxisAlignedBB;
+import org.powernukkitx.math.Vector3;
+import org.powernukkitx.nbt.tag.*;
 import org.cloudburstmc.math.vector.Vector3f;
 import org.cloudburstmc.protocol.bedrock.data.BuildPlatform;
 import org.cloudburstmc.protocol.bedrock.data.GameType;
 import org.cloudburstmc.protocol.bedrock.data.actor.ActorDataTypes;
 import org.cloudburstmc.protocol.bedrock.packet.AddPlayerPacket;
-import org.cloudburstmc.protocol.bedrock.packet.MovePlayerPacket;
 
 import java.awt.Color;
 import java.util.UUID;
@@ -59,7 +61,7 @@ public class EntityHead extends EntityHuman implements CustomEntity {
             addPlayerPacket.setPlayerName(this.getName());
             addPlayerPacket.setTargetActorID(this.getId());
             addPlayerPacket.setTargetRuntimeID(this.getId());
-            addPlayerPacket.setPosition(Vector3f.from(this.x, this.y, this.z));
+            addPlayerPacket.setPosition(move ? Vector3f.ZERO : Vector3f.from(this.x, this.y, this.z));
             addPlayerPacket.setVelocity(Vector3f.from(this.motionX, this.motionY, this.motionZ));
             addPlayerPacket.setRotation(Vector3f.from(this.pitch, this.yaw, this.headYaw));
             addPlayerPacket.setCarriedItem(this.getInventory().getItemInMainHand().toNetwork());
@@ -69,7 +71,14 @@ public class EntityHead extends EntityHuman implements CustomEntity {
             addPlayerPacket.setPlayerGameType(GameType.SURVIVAL);
             addPlayerPacket.setAbilitiesData(this.buildSerializedAbilitiesData());
             player.sendPacket(addPlayerPacket);
-
+            if(move) {
+                MovePlayerPacket movePlayerPacket = new MovePlayerPacket();
+                movePlayerPacket.setPlayerRuntimeID(this.id);
+                movePlayerPacket.setPosition(this.toNetwork());
+                movePlayerPacket.setRotation(Vector3f.from(this.pitch, this.yaw, this.headYaw));
+                movePlayerPacket.setPositionMode(PositionMode.RESPAWN);
+                player.sendPacket(movePlayerPacket);
+            }
             this.server.removePlayerListData(this.getUniqueId(), player);
         }
 

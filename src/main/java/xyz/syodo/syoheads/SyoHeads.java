@@ -1,7 +1,7 @@
 package xyz.syodo.syoheads;
 
-import cn.nukkit.plugin.PluginBase;
-import cn.nukkit.plugin.PluginManager;
+import org.powernukkitx.plugin.PluginBase;
+import org.powernukkitx.plugin.PluginManager;
 import xyz.syodo.syoheads.commands.HeadCommand;
 import xyz.syodo.syoheads.database.Database;
 import xyz.syodo.syoheads.listener.BlockBreakListener;
