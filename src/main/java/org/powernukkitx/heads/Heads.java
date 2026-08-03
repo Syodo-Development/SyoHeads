@@ -1,16 +1,16 @@
-package xyz.syodo.syoheads;
+package org.powernukkitx.heads;
 
 import org.powernukkitx.plugin.PluginBase;
 import org.powernukkitx.plugin.PluginManager;
-import xyz.syodo.syoheads.commands.HeadCommand;
-import xyz.syodo.syoheads.database.Database;
-import xyz.syodo.syoheads.listener.BlockBreakListener;
-import xyz.syodo.syoheads.listener.BlockPlaceListener;
-import xyz.syodo.syoheads.listener.ChunkLoadListener;
+import org.powernukkitx.heads.commands.HeadCommand;
+import org.powernukkitx.heads.database.Database;
+import org.powernukkitx.heads.listener.BlockBreakListener;
+import org.powernukkitx.heads.listener.BlockPlaceListener;
+import org.powernukkitx.heads.listener.ChunkLoadListener;
 
-public class SyoHeads extends PluginBase {
+public class Heads extends PluginBase {
 
-    private static SyoHeads INSTANCE;
+    private static Heads INSTANCE;
 
     @Override
     public void onLoad() {
@@ -31,7 +31,7 @@ public class SyoHeads extends PluginBase {
         getServer().getCommandMap().register("head", new HeadCommand());
     }
 
-    public static SyoHeads get() {
+    public static Heads get() {
         return INSTANCE;
     }
 }

@@ -1,4 +1,4 @@
-package xyz.syodo.syoheads.listener;
+package org.powernukkitx.heads.listener;
 
 import org.powernukkitx.block.BlockPlayerHead;
 import org.powernukkitx.blockentity.BlockEntitySkull;
@@ -7,8 +7,8 @@ import org.powernukkitx.event.EventPriority;
 import org.powernukkitx.event.Listener;
 import org.powernukkitx.event.block.BlockPlaceEvent;
 import org.powernukkitx.nbt.tag.CompoundTag;
-import xyz.syodo.syoheads.entity.EntityHead;
-import xyz.syodo.syoheads.utils.SkinUtils;
+import org.powernukkitx.heads.entity.EntityHead;
+import org.powernukkitx.heads.utils.SkinUtils;
 
 public class BlockPlaceListener implements Listener {
 

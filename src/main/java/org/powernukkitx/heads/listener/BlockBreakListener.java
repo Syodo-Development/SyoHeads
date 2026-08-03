@@ -1,4 +1,4 @@
-package xyz.syodo.syoheads.listener;
+package org.powernukkitx.heads.listener;
 
 import org.powernukkitx.block.BlockPlayerHead;
 import org.powernukkitx.blockentity.BlockEntitySkull;
@@ -9,8 +9,8 @@ import org.powernukkitx.event.Listener;
 import org.powernukkitx.event.block.BlockBreakEvent;
 import org.powernukkitx.item.Item;
 import org.powernukkitx.nbt.tag.CompoundTag;
-import xyz.syodo.syoheads.entity.EntityHead;
-import xyz.syodo.syoheads.utils.ItemUtils;
+import org.powernukkitx.heads.entity.EntityHead;
+import org.powernukkitx.heads.utils.ItemUtils;
 
 public class BlockBreakListener implements Listener {
 

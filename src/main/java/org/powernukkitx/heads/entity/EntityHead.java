@@ -1,6 +1,5 @@
-package xyz.syodo.syoheads.entity;
+package org.powernukkitx.heads.entity;
 
-import org.cloudburstmc.protocol.bedrock.data.payload.move.MovePlayerTeleportData;
 import org.cloudburstmc.protocol.bedrock.data.payload.move.PositionMode;
 import org.cloudburstmc.protocol.bedrock.packet.MovePlayerPacket;
 import org.powernukkitx.Player;

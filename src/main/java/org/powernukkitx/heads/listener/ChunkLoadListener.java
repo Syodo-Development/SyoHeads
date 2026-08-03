@@ -1,4 +1,4 @@
-package xyz.syodo.syoheads.listener;
+package org.powernukkitx.heads.listener;
 
 import org.powernukkitx.blockentity.BlockEntity;
 import org.powernukkitx.blockentity.BlockEntitySkull;
@@ -6,7 +6,7 @@ import org.powernukkitx.event.EventHandler;
 import org.powernukkitx.event.EventPriority;
 import org.powernukkitx.event.Listener;
 import org.powernukkitx.event.level.ChunkLoadEvent;
-import xyz.syodo.syoheads.entity.EntityHead;
+import org.powernukkitx.heads.entity.EntityHead;
 
 public class ChunkLoadListener implements Listener {
 

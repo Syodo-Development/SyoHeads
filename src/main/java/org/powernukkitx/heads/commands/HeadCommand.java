@@ -1,4 +1,4 @@
-package xyz.syodo.syoheads.commands;
+package org.powernukkitx.heads.commands;
 
 import org.powernukkitx.Player;
 import org.powernukkitx.command.Command;
@@ -10,8 +10,8 @@ import org.powernukkitx.entity.Entity;
 import org.powernukkitx.entity.data.human.Skin;
 import org.powernukkitx.item.Item;
 import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
-import xyz.syodo.syoheads.database.Database;
-import xyz.syodo.syoheads.utils.ItemUtils;
+import org.powernukkitx.heads.database.Database;
+import org.powernukkitx.heads.utils.ItemUtils;
 
 import java.util.ArrayList;
 import java.util.Map;

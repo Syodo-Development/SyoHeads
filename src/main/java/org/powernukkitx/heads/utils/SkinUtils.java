@@ -1,4 +1,4 @@
-package xyz.syodo.syoheads.utils;
+package org.powernukkitx.heads.utils;
 
 import org.powernukkitx.block.BlockPlayerHead;
 import org.powernukkitx.blockentity.BlockEntitySkull;

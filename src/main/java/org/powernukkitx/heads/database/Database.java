@@ -1,4 +1,4 @@
-package xyz.syodo.syoheads.database;
+package org.powernukkitx.heads.database;
 
 import org.powernukkitx.Player;
 import org.powernukkitx.event.EventHandler;
@@ -9,7 +9,7 @@ import org.powernukkitx.form.window.SimpleForm;
 import org.powernukkitx.item.Item;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import xyz.syodo.syoheads.utils.ItemUtils;
+import org.powernukkitx.heads.utils.ItemUtils;
 
 import java.net.URL;
 import java.util.HashMap;
